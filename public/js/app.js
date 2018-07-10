@@ -2,8 +2,7 @@
 
   'use strict';
 
-  angular
-    .module('app', ['ui.router'])
+  angular.module('app', ['ui.router'])
     .controller('MainController', mainController)
     .config(config);
 
@@ -82,7 +81,7 @@
         controller: 'MainController'
       });
 
-    // $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/');
 
     $locationProvider.hashPrefix('');
 
