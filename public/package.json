@@ -1,0 +1,33 @@
+{
+    "title": "Eth Survivor",
+    "name": "eth-survivor",
+    "version": "4.1.1",
+    "description": "A ethereum based survival pool lottery",
+    "keywords": [
+        "ethereum"
+    ],
+    "homepage": "https://github.com/dattnguyen82/Eth-Survive",
+    "license": "MIT",
+    "author": "Dat Nguyen",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/BlackrockDigital/startbootstrap-grayscale.git"
+    },
+    "dependencies": {
+        "bootstrap": "4.1.1",
+        "font-awesome": "4.7.0",
+        "jquery": "3.3.1",
+        "jquery.easing": "^1.4.1",
+        "@uirouter/angularjs": "^1.0.4",
+        "angular": "^1.6.1"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.24.5",
+        "gulp": "^4.0.0",
+        "gulp-clean-css": "3.9.4",
+        "gulp-header": "2.0.5",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "4.0.1",
+        "gulp-uglify": "3.0.0"
+    }
+}

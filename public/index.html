@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Eth-SurviveGame - SurviveGame and Win</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
+
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/app.run.js"></script>
+    <script type="text/javascript" src="js/service.app.js"></script>
+
+  </head>
+
+  <body id="page-top" ng-controller="MainController">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#join">Join The Game</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">Game</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#status">Status</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#players">Players</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="masthead">
+      <div class="intro-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <h1 class="brand-heading">Eth SurviveGame</h1>
+              <p class="intro-text">an ethereum survival pool lottery</p>
+              <a href="#about" class="btn btn-circle js-scroll-trigger">
+                <i class="fa fa-angle-double-down animated"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="content-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mx-auto">
+            <h2>How to play</h2>
+            <p>The rules are very simple:
+                <ul>
+                  <li>Send the at minimum entry fee to the game contract address to join</li>
+                  <li>If you send additional funds, it will be added to your balance and automatically applied to the next round</li>
+                  <li>Every 2 hours, 10% of the current players will be infected (minimum 1 player infected)</li>
+                  <li>Infected players will have the next 2 hours to pay a cure fee (which grants immunity for an additional 2 hours)</li>
+                  <li>If players forget or choose not to cure themselves, then they die and are eliminated from the current round</li>
+                  <li>Every 24 hours, the game is settled.  The remaining living players, split the balance as a prize for staying alive</li>
+                  <li>The next round automatically starts automatically, If you have a balance greater than the entry fee you will automatically be revived and entered into the next round, other wise you will remain dead</li>
+                </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="join" class="content-section text-center">
+      <div class="container">
+        <div class="col-lg-12 mx-auto">
+          <h2>Join the Game</h2>
+          <p>Current Entry/Cure Fee: 0.001 ETH (1000000000000000 wei) </p>
+          <img src="img/qrcode.png">
+        </div>
+      </div>
+    </section>
+
+    <!--$scope.gameData.prizePool = gweiToEther(results.data.totalPrizePool);-->
+    <!--$scope.gameData.playerCount = results.data.totalPlayersInDB;-->
+    <!--$scope.gameData.entryFee = gweiToEther(results.data.entryFee);-->
+    <!--$scope.gameData.cureFee = gweiToEther(results.data.cureFee);-->
+
+    <!-- Contact Section -->
+    <section id="status" class="content-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Game Status</h2>
+
+            <p>
+              Total Prize Pool: <strong>{{gameData.prizePool}} ETH</strong>
+            </p>
+            <p>
+             Time until next infection: <strong>1:14:21</strong>
+            </p>
+            <p>
+             Time remaining in current round: <strong>18:46:39</strong>
+            </p>
+
+            <table align="center" width="400" border="1">
+              <thead>
+                <td align="center"><strong>Total Players</strong></td>
+                <td align="center"><strong>Infected Players</strong></td>
+                <td align="center"><strong>Dead Players</strong></td>
+              </thead>
+              <tr>
+                <td><small>{{gameData.playerCount}}</small></td>
+                <td><small>{{gameData.infectedCount}}</small></td>
+                <td><small>{{gameData.deadCount}}</small></td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="players" class="content-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Players</h2>
+           <table align="center" width="100%" border="1">
+             <thead>
+             <td><strong>Address</strong></td>
+             <td><strong>Joined</strong></td>
+             <td><strong>Status</strong></td>
+             <td><strong>Balance</strong></td>
+             </thead>
+             <tr ng-repeat="player in players">
+               <td><small><a href="https://ropsten.etherscan.io/address/{{player.address}}" target="_blank">{{player.address}}</a></small></td>
+               <td><small>{{player.joined | date : 'yyyy.MM.dd HH:mm:ss'}}</small></td>
+               <td><small>{{player.status}}</small></td>
+               <td><small>{{player.balance}}</small></td>
+             </tr>
+           </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+      <div class="container text-center">
+        <p>Copyright &copy; Dat Nguyen 2018</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/grayscale.js"></script>
+
+  </body>
+
+</html>
