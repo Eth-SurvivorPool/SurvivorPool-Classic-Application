@@ -14,3 +14,5 @@ let port = process.env.PORT || 3000;
 let server = app.listen(port, hostname, function() {
 	console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+console.log(server);
