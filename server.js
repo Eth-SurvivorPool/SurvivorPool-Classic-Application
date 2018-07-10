@@ -9,7 +9,7 @@ app.get('/*', function(req, res) {
 });
 
 let hostname = 'localhost';
-let port = process.env.VCAP_APP_PORT || 3000;
+let port = process.env.PORT || 3000;
 
 app.set('port', (process.env.PORT || 5000));
 
