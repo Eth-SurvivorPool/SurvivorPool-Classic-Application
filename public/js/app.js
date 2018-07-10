@@ -1,7 +1,6 @@
 (function () {
 
   'use strict';
-
   angular.module('app', ['ui.router'])
     .controller('MainController', mainController)
     .config(config);
@@ -64,15 +63,11 @@
   }
 
   config.$inject = [
-    '$stateProvider',
-    '$locationProvider',
-    '$urlRouterProvider'
+    '$stateProvider'
   ];
 
   function config(
     $stateProvider,
-    $locationProvider,
-    $urlRouterProvider
   ) {
 
     $stateProvider
@@ -80,14 +75,6 @@
         url: '/',
         controller: 'MainController'
       });
-
-    $urlRouterProvider.otherwise('/');
-
-    $locationProvider.hashPrefix('');
-
-    // Comment out the line below to run the app
-    // without HTML5 mode (will use hashes in routes)
-    $locationProvider.html5Mode(true);
   }
 
 })();
