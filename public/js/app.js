@@ -34,7 +34,7 @@
 
    appService.getGameData().then( (results)=>{
 	   console.log(results.data);
-	   $scope.gameData.prizePool = gweiToEther(results.data.totalPrizePool);
+	   $scope.gameData.prizePool = gweiToEther(results.data.roundBalance);
 	   $scope.gameData.playerCount = results.data.totalPlayersInDB;
 	   $scope.gameData.entryFee = gweiToEther(results.data.entryFee);
 	   $scope.gameData.cureFee = gweiToEther(results.data.cureFee);
