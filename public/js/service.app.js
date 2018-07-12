@@ -21,6 +21,10 @@ angular.module('app')
 		    return $http({method: 'GET', url: getAllPlayersUrl});
 	    };
 
+	    var getClockUrl = baseUrl + "/clock";
+	    serviceAPIs.getClock = function() {
+		    return $http({method: 'GET', url: getClockUrl});
+	    };
 
 	    var blockchainSignDocumentUrl = baseUrl + '/sign';
         serviceAPIs.blockchainSignDocument = function(payload) {

@@ -79,8 +79,8 @@
                   <li>Every 2 hours, 10% of the current players will be infected (minimum 1 player infected)</li>
                   <li>Infected players will have the next 2 hours to pay a cure fee (which grants immunity for an additional 2 hours)</li>
                   <li>If players forget or choose not to cure themselves, then they die and are eliminated from the current round</li>
-                  <li>Every 24 hours, the game is settled.  The remaining living players, split the balance as a prize for staying alive</li>
-                  <li>The next round automatically starts automatically, If you have a balance greater than the entry fee you will automatically be revived and entered into the next round, other wise you will remain dead</li>
+                  <li>Every 24 hours, the game is settled.  The remaining living players, split the round balance as a prize for staying alive</li>
+                  <li>The next round automatically starts automatically, if you have a balance greater than the entry fee you will automatically be revived and entered into the next round, other wise you will remain dead</li>
                 </ul>
             </p>
           </div>
@@ -92,17 +92,13 @@
     <section id="join" class="content-section text-center">
       <div class="container">
         <div class="col-lg-12 mx-auto">
-          <h2>Join the Game</h2>
-          <p>Current Entry/Cure Fee: 0.001 ETH (1000000000000000 wei) </p>
+          <h2>Join the Game / Cure Player</h2>
           <img src="img/qrcode.png">
+          <p>Entry Fee: {{gameData.entryFeeEther}} ETH ({{gameData.entryFee}}  wei) </p>
+          <p>Cure Fee: {{gameData.cureFeeEther}} ETH ({{gameData.cureFee}}  wei) </p>
         </div>
       </div>
     </section>
-
-    <!--$scope.gameData.prizePool = gweiToEther(results.data.totalPrizePool);-->
-    <!--$scope.gameData.playerCount = results.data.totalPlayersInDB;-->
-    <!--$scope.gameData.entryFee = gweiToEther(results.data.entryFee);-->
-    <!--$scope.gameData.cureFee = gweiToEther(results.data.cureFee);-->
 
     <!-- Contact Section -->
     <section id="status" class="content-section text-center">
@@ -115,10 +111,10 @@
               Total Prize Pool: <strong>{{gameData.prizePool}} ETH</strong>
             </p>
             <p>
-             Time until next infection: <strong>1:14:21</strong>
+             Time until next infection: <strong>{{nextInfectionCountdown}}</strong>
             </p>
             <p>
-             Time remaining in current round: <strong>18:46:39</strong>
+             Time remaining in current round: <strong>{{nextGameSettledCountdown}}</strong>
             </p>
 
             <table align="center" width="400" border="1">
