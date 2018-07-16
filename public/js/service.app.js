@@ -16,6 +16,11 @@ angular.module('app')
 		    return $http({method: 'GET', url: getPlayerDataUrl});
 	    };
 
+	    var getRecentWinnersUrl = baseUrl + "/winners";
+	    serviceAPIs.getRecentWinners = function() {
+		    return $http({method: 'GET', url: getRecentWinnersUrl});
+	    };
+
 	    var getAllPlayersUrl = baseUrl + "/all";
 	    serviceAPIs.getAllPlayers = function() {
 		    return $http({method: 'GET', url: getAllPlayersUrl});

@@ -31,17 +31,48 @@
 
    $scope.gameData = {};
    $scope.players = [];
+   $scope.winners = [];
 
    $scope.nextGameSettled = null;
    $scope.nextGameSettledCountdown = null;
    $scope.nextInfectTime  = null;
    $scope.nextInfectionCountdown = null;
 
+   let getClockFromServer = () => {
+		  appService.getClock().then(function (response) {
+			  var clock = response.data.timestamp;
+			  var infectDate = new Date(clock);
+			  var roundDate = new Date(clock + (24 * 60 * 60 * 1000));
+
+			  //calculate next infect date
+			  var hour = infectDate.getHours();
+
+			  infectDate.setSeconds(0);
+			  infectDate.setMinutes(0);
+			  var delta = hour % 2 == 0 ? 2 : 1;
+
+			  infectDate.setHours(hour + delta);
+
+			  $scope.nextInfectTime = infectDate;
+
+			  //calculate next round date
+			  roundDate.setHours(0);
+			  roundDate.setMinutes(0);
+			  roundDate.setSeconds(0);
+			  $scope.nextGameSettled = roundDate;
+		  });
+	  };
+
    let callAtInterval = () => {
 	    if ($scope.nextInfectTime != null) {
 	    	  var now = new Date().getTime();
 
 	    	  var infectDistance = $scope.nextInfectTime - now;
+
+	    	  if (infectDistance < 0)
+		      {
+			      getClockFromServer();
+		      }
 
 	    	  // Time calculations for days, hours, minutes and seconds
 	    	  var hours = Math.floor((infectDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -52,6 +83,11 @@
 
 		      var roundDistance = $scope.nextGameSettled - now;
 
+		    if (roundDistance < 0)
+		    {
+			    getClockFromServer();
+		    }
+
 		    var hours = Math.floor((roundDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 		    var minutes = Math.floor((roundDistance % (1000 * 60 * 60)) / (1000 * 60));
 		    var seconds = Math.floor((roundDistance % (1000 * 60)) / 1000);
@@ -61,29 +97,7 @@
 	    }
     };
 
-    appService.getClock().then(function(response){
-		  var clock = response.data.timestamp;
-		  var infectDate = new Date(clock);
-		  var roundDate = new Date(clock + (24 * 60 * 60 * 1000));
-
-		  //calculate next infect date
-	      var hour = infectDate.getHours();
-
-	      infectDate.setSeconds(0);
-	      infectDate.setMinutes(0);
-		  var delta = hour % 2 == 0 ? 2 : 1;
-
-		  infectDate.setHours(hour + delta);
-
-		  $scope.nextInfectTime = infectDate;
-
-		  //calculate next round date
-          roundDate.setHours(0);
-	      roundDate.setMinutes(0);
-	      roundDate.setSeconds(0);
-	      $scope.nextGameSettled = roundDate;
-   });
-
+   getClockFromServer();
    $interval(callAtInterval, 1000);
 
    appService.getGameData().then( (results)=>{
@@ -116,6 +130,19 @@
        }
 	   console.log($scope.players);
    });
+
+   appService.getRecentWinners().then((results)=> {
+	    if (results.data != null) {
+		    console.log(results.dat);
+		    for (var i = 0; i < results.data.length; i++) {
+			    $scope.winners.push({
+				    address: results.data[i].address,
+				    prize: results.data[i].prize,
+			    });
+		    }
+	    }
+   });
+
   }
 
   config.$inject = [

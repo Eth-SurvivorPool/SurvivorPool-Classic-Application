@@ -44,6 +44,12 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#players">Players</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#winners">Winners</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#faq">FAQ</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -55,8 +61,8 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-8 mx-auto">
-              <h1 class="brand-heading">Eth SurviveGame</h1>
-              <p class="intro-text">an ethereum survival pool lottery</p>
+              <h1 class="brand-heading">Eth Survival Pool</h1>
+              <p class="intro-text">a ethereum survival pool lottery</p>
               <a href="#about" class="btn btn-circle js-scroll-trigger">
                 <i class="fa fa-angle-double-down animated"></i>
               </a>
@@ -88,35 +94,28 @@
       </div>
     </section>
 
-    <!-- Download Section -->
     <section id="join" class="content-section text-center">
       <div class="container">
         <div class="col-lg-12 mx-auto">
           <h2>Join the Game / Cure Player</h2>
-          <img src="img/qrcode.png">
-          <p>Entry Fee: {{gameData.entryFeeEther}} ETH ({{gameData.entryFee}}  wei) </p>
-          <p>Cure Fee: {{gameData.cureFeeEther}} ETH ({{gameData.cureFee}}  wei) </p>
+          <img src="img/qrcode.png"><br>
+          Address: <strong>0x66341292964da8AEaf3C1F8cb71eeBa2CBb92970</strong><br>
+          Entry Fee: {{gameData.entryFeeEther}} ETH ({{gameData.entryFee}}  wei)<br>
+          Cure Fee: {{gameData.cureFeeEther}} ETH ({{gameData.cureFee}}  wei)
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="status" class="content-section text-center">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Game Status</h2>
-
             <p>
-              Total Prize Pool: <strong>{{gameData.prizePool}} ETH</strong>
+              Total Prize Pool: <strong>{{gameData.prizePool}} ETH</strong><br>
+              Time until next infection: <strong>{{nextInfectionCountdown}}</strong><br>
+              Time remaining in current round: <strong>{{nextGameSettledCountdown}}</strong><br>
             </p>
-            <p>
-             Time until next infection: <strong>{{nextInfectionCountdown}}</strong>
-            </p>
-            <p>
-             Time remaining in current round: <strong>{{nextGameSettledCountdown}}</strong>
-            </p>
-
             <table align="center" width="400" border="1">
               <thead>
                 <td align="center"><strong>Total Players</strong></td>
@@ -135,13 +134,12 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="players" class="content-section text-center">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Players</h2>
-           <table align="center" width="100%" border="1">
+            <table align="center" width="100%" border="1">
              <thead>
              <td><strong>Address</strong></td>
              <td><strong>Joined</strong></td>
@@ -160,6 +158,93 @@
       </div>
     </section>
 
+    <section id="winners" class="content-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Recent Winners</h2>
+            <table align="center" width="100%" border="1">
+              <thead>
+              <td><strong>Address</strong></td>
+              <td><strong>Prize</strong></td>
+              </thead>
+              <tr ng-repeat="player in winners">
+                <td><small><a href="https://ropsten.etherscan.io/address/{{player.address}}" target="_blank">{{player.address}}</a></small></td>
+                <td><small>{{player.prize}}</small></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="faq" class="content-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 mx-auto">
+            <h2>FAQ</h2>
+            <ul>
+              <li> <strong>What is the current status of the game.</strong>
+                <ul>
+                  <li>The game is currently in beta, and running on the ropsten test net, so none of the transactions are worth "real" eth.</li>
+                </ul>
+              </li>
+              <li> <strong>How do I join the game</strong>
+                  <ul>
+                    <li>The game requires you to have a eth wallet on the <strong>Ropsten Test Network</strong> with some ether in that account</li>
+                    <li>It's also <strong>highly</strong> recommended that you install <a href="https://metamask.io/">Metamask</a> to interact with the blockchain network.</li>
+                    <li>To create a new account with Metamask:
+                      <ul>
+                        <li>Click the Account icon on the right and scroll to <strong>Create Account</strong></li>
+                      </ul>
+                    </li>
+                    <li>To import an account Metamask:
+                      <ul>
+                        <li>Click the Account icon on the right and scroll to <strong>Import Account</strong></li>
+                        <li>If you have your private key, you can paste the string in the text box</li>
+                        <li>If you have a JSON export of your account (from parity, myetherwallet.com etc) you can select JSON File from the type box</li>
+                        <li>Click <strong>IMPORT</strong></li>
+                      </ul>
+                    </li>
+                    <li>To get some ether from the Ropsten test faucet
+                      <ul>
+                        <li>Select your account in the Metamask extension</li>
+                        <li>Click <strong>BUY</strong></li>
+                        <li>Click <strong>ROPSTEN TEST FAUCET</strong></li>
+                        <li>A new window/tab should open with the URL:  <a href="https://faucet.metamask.io/">https://faucet.metamask.io/</a></li>
+                        <li>Double check that your address matches the address under <strong>user</strong></li>
+                        <li>Click <strong>request 1 ether from faucet</strong></li>
+                        <li>1 ether should appear in your account after a few minutes</li>
+                      </ul>
+                    </li>
+                    <li>To join the game
+                      <ul>
+                        <li>Select your account in the Metamask extension</li>
+                        <li>Click <strong>SEND</strong></li>
+                        <li>Set the Recipient Address to <strong>0x66341292964da8AEaf3C1F8cb71eeBa2CBb92970</strong></li>
+                        <li>Set amount to the entry fee (at minimum)</li>
+                        <li>Click <strong>NEXT</strong></li>
+                        <li>Set the <strong>Gas Price</strong> to a reasonable amount of gwei (10 to 20 is sufficient) </li>
+                        <li>Click <strong>SUBMIT</strong></li>
+                        <li>Refresh this page and you should see your address in the list of players</li>
+                      </ul>
+                    </li>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container text-center">
+        Check it out on:<br>
+        <a href=" https://www.stateofthedapps.com/dapps/survivalpool-classic" target="_blank"><img src="img/logo-reverse.3d8cbed.png"></a>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer>
