@@ -58,6 +58,7 @@
 			  infectDate.setSeconds(0);
 			  infectDate.setMinutes(0);
 			  var delta = hour % 2 == 0 ? 2 : 1;
+			  delta = 1;
 
 			  infectDate.setHours(hour + delta);
 
