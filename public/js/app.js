@@ -38,6 +38,14 @@
    $scope.nextInfectTime  = null;
    $scope.nextInfectionCountdown = null;
 
+   $scope.loading = {
+   	clock: true,
+	   gameData: true,
+	   playerData: true,
+	   players: true,
+	   winners: true
+   };
+
    let getClockFromServer = () => {
 		  appService.getClock().then(function (response) {
 			  var clock = response.data.timestamp;
@@ -60,6 +68,7 @@
 			  roundDate.setMinutes(0);
 			  roundDate.setSeconds(0);
 			  $scope.nextGameSettled = roundDate;
+			  $scope.loading.clock = false;
 		  });
 	  };
 
@@ -109,6 +118,7 @@
 	   $scope.gameData.cureFeeEther = gweiToEther(results.data.cureFee);
 	   $scope.gameData.cureFee = results.data.cureFee;
 	   console.log($scope.gameData);
+	   $scope.loading.gameData = false;
    });
 
    appService.getPlayerData().then( (results)=>{
@@ -116,6 +126,8 @@
 	   $scope.gameData.infectedCount = results.data.infectedCount;
 	   $scope.gameData.deadCount = results.data.playerCount - results.data.aliveCount;
        console.log($scope.gameData);
+
+	   $scope.loading.playerData = false;
    });
 
    appService.getAllPlayers().then( (results)=>{
@@ -129,6 +141,8 @@
            });
        }
 	   console.log($scope.players);
+
+	   $scope.loading.players = false;
    });
 
    appService.getRecentWinners().then((results)=> {
@@ -141,6 +155,8 @@
 			    });
 		    }
 	    }
+
+	   $scope.loading.winners = false;
    });
 
   }

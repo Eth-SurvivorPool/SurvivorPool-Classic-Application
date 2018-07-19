@@ -111,12 +111,16 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Game Status</h2>
-            <p>
+
+            <i class="fa fa-spinner fa-spin" ng-show="loading.gameData || loading.clock"></i>
+            <p ng-show="!loading.gameData && !loading.clock">
               Total Prize Pool: <strong>{{gameData.prizePool}} ETH</strong><br>
               Time until next infection: <strong>{{nextInfectionCountdown}}</strong><br>
               Time remaining in current round: <strong>{{nextGameSettledCountdown}}</strong><br>
             </p>
-            <table align="center" width="400" border="1">
+
+              <i class="fa fa-spinner fa-spin" ng-show="loading.gameData || loading.playerData"></i>
+            <table align="center" width="400" border="1" ng-show="!loading.gameData && !loading.playerData">
               <thead>
                 <td align="center"><strong>Total Players</strong></td>
                 <td align="center"><strong>Infected Players</strong></td>
@@ -139,7 +143,9 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Players</h2>
-            <table align="center" width="100%" border="1">
+
+            <i class="fa fa-spinner fa-spin" ng-show="loading.players"></i>
+            <table align="center" width="100%" border="1" ng-show="!loading.players">
              <thead>
              <td><strong>Address</strong></td>
              <td><strong>Joined</strong></td>
@@ -163,7 +169,8 @@
         <div class="row">
           <div class="col-lg-8 mx-auto">
             <h2>Recent Winners</h2>
-            <table align="center" width="100%" border="1">
+            <i class="fa fa-spinner fa-spin" ng-show="loading.winners"></i>
+            <table align="center" width="100%" border="1" ng-show="!loading.winners">
               <thead>
               <td><strong>Address</strong></td>
               <td><strong>Prize</strong></td>
@@ -177,7 +184,6 @@
         </div>
       </div>
     </section>
-
 
     <section id="faq" class="content-section">
       <div class="container">
